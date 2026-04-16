@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read data from CSV
+df = pd.read_csv("data.csv")
+
+print("\nStudent Marks Data:\n")
+print(df)
+
+# Calculate Average, Max, Min per subject
+subjects = df.columns[1:]  # Exclude 'Student' column
+
+average_marks = df[subjects].mean()
+max_marks = df[subjects].max()
+min_marks = df[subjects].min()
+
+print("\nAverage Marks per Subject:\n", average_marks)
+print("\nMaximum Marks per Subject:\n", max_marks)
+print("\nMinimum Marks per Subject:\n", min_marks)
+
+# Bar Plot: Average marks per subject
+plt.figure(figsize=(8,5))
+plt.bar(subjects, average_marks)
+plt.title("Average Marks per Subject")
+plt.xlabel("Subjects")
+plt.ylabel("Average Marks")
+plt.show()
+
+# Compare students using bar chart
+df.set_index("Student").plot(kind="bar", figsize=(10,6))
+plt.title("Student-wise Marks Comparison")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.legend(title="Subjects")
+plt.show()
